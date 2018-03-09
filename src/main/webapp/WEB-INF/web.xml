@@ -8,5 +8,23 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
-        </welcome-file-list>
-    </web-app>
+    </welcome-file-list>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Admin</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>rsvpadmin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>BASIC</auth-method>
+    </login-config>
+    
+    <security-role>
+        <role-name>rsvpadmin</role-name>
+    </security-role>
+</web-app>

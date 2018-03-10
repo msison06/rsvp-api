@@ -17,6 +17,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import org.apache.johnzon.mapper.JohnzonConverter;
+import org.apache.johnzon.mapper.JohnzonIgnore;
 import org.apache.johnzon.mapper.JohnzonProperty;
 
 /**
@@ -39,6 +40,7 @@ public class Registration implements Serializable {
     @OneToOne
     private RegisteredGuest guestInfo;
 
+    @JohnzonIgnore
     @ManyToOne(optional = false)
     private Event event;
 

@@ -8,6 +8,7 @@ package com.mycompany.rsvp.entity;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.apache.johnzon.mapper.JohnzonIgnore;
 
 /**
  *
@@ -17,6 +18,7 @@ import javax.persistence.Table;
 @Table(name = "INVITED_GUEST")
 public class InvitedGuest extends Guest {
 
+    @JohnzonIgnore
     @ManyToOne(optional = false)
     private Event event;
 

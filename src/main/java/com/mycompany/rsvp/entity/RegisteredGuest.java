@@ -17,4 +17,12 @@ import javax.persistence.Table;
 public class RegisteredGuest extends Guest {
 
     private Integer additionalGuests;
+
+    public Integer getAdditionalGuests() {
+        return additionalGuests;
+    }
+
+    public void setAdditionalGuests(Integer additionalGuests) {
+        this.additionalGuests = additionalGuests;
+    }
 }

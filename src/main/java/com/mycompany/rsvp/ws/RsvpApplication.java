@@ -12,6 +12,7 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("/rsvp")
 public class RsvpApplication extends Application {
 
+    @Override
     public Set<Class<?>> getClasses() {
         HashSet<Class<?>> resources = new HashSet<>();
         resources.add(RsvpResource.class);

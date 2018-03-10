@@ -5,6 +5,7 @@
         <class>com.mycompany.rsvp.entity.Guest</class>
         <class>com.mycompany.rsvp.entity.InvitedGuest</class>
         <class>com.mycompany.rsvp.entity.RegisteredGuest</class>
+        <class>com.mycompany.rsvp.entity.Registration</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:C:\dev\projects\research\java\rsvp-ws\rsvp-ws\rsvp.db"/>

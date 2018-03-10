@@ -8,12 +8,13 @@ package com.mycompany.rsvp.entity;
 import com.mycompany.rsvp.dtoadapter.DateToMillisecondAdapter;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import org.apache.johnzon.mapper.JohnzonConverter;
@@ -24,23 +25,25 @@ import org.apache.johnzon.mapper.JohnzonProperty;
  * @author Mark
  */
 @Entity
-@Table(name = "REGISTRATION")
-public class Registration implements Serializable {
+@Table(name = "EVENT")
+public class Event implements Serializable {
 
     @Id
     private Long id;
 
-    @Column(name = "REG_DATE")
+    private String name;
+
+    @Column(name = "EVENT_DATE")
     @JohnzonProperty("date")
     @Temporal(javax.persistence.TemporalType.DATE)
     @JohnzonConverter(DateToMillisecondAdapter.class)
     private Date date;
 
-    @OneToOne
-    private RegisteredGuest guestInfo;
+    @OneToMany(mappedBy = "event")
+    private Set<InvitedGuest> guestList = new HashSet<>();
 
-    @ManyToOne(optional = false)
-    private Event event;
+    @OneToMany(mappedBy = "event")
+    private Set<Registration> registrations = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -48,6 +51,14 @@ public class Registration implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getDate() {
@@ -58,25 +69,25 @@ public class Registration implements Serializable {
         this.date = date;
     }
 
-    public RegisteredGuest getGuestInfo() {
-        return guestInfo;
+    public Set<InvitedGuest> getGuestList() {
+        return guestList;
     }
 
-    public void setGuestInfo(RegisteredGuest guestInfo) {
-        this.guestInfo = guestInfo;
+    public void setGuestList(Set<InvitedGuest> guestList) {
+        this.guestList = guestList;
     }
 
-    public Event getEvent() {
-        return event;
+    public Set<Registration> getRegistrations() {
+        return registrations;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setRegistrations(Set<Registration> registrations) {
+        this.registrations = registrations;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 7;
         hash = 97 * hash + Objects.hashCode(this.id);
         return hash;
     }
@@ -92,7 +103,7 @@ public class Registration implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Registration other = (Registration) obj;
+        final Event other = (Event) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }

@@ -6,6 +6,7 @@
 package com.mycompany.rsvp.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -16,6 +17,33 @@ import javax.persistence.Table;
 @Table(name = "INVITED_GUEST")
 public class InvitedGuest extends Guest {
 
+    @ManyToOne(optional = false)
+    private Event event;
+
     private Integer estAdditionalGuests;
     private String guestPasscode;
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public Integer getEstAdditionalGuests() {
+        return estAdditionalGuests;
+    }
+
+    public void setEstAdditionalGuests(Integer estAdditionalGuests) {
+        this.estAdditionalGuests = estAdditionalGuests;
+    }
+
+    public String getGuestPasscode() {
+        return guestPasscode;
+    }
+
+    public void setGuestPasscode(String guestPasscode) {
+        this.guestPasscode = guestPasscode;
+    }
 }

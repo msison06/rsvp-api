@@ -21,7 +21,6 @@ public class InvitedGuest extends Guest {
     private Event event;
 
     private Integer estAdditionalGuests;
-    private String guestPasscode;
 
     public Event getEvent() {
         return event;
@@ -37,13 +36,5 @@ public class InvitedGuest extends Guest {
 
     public void setEstAdditionalGuests(Integer estAdditionalGuests) {
         this.estAdditionalGuests = estAdditionalGuests;
-    }
-
-    public String getGuestPasscode() {
-        return guestPasscode;
-    }
-
-    public void setGuestPasscode(String guestPasscode) {
-        this.guestPasscode = guestPasscode;
     }
 }

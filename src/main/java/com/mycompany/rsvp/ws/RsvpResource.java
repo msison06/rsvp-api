@@ -1,9 +1,13 @@
 package com.mycompany.rsvp.ws;
 
 import com.mycompany.rsvp.entity.Event;
+import com.mycompany.rsvp.entity.InvitedGuest;
+import com.mycompany.rsvp.entity.RegisteredGuest;
 import com.mycompany.rsvp.entity.Registration;
+import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
@@ -31,7 +35,7 @@ public class RsvpResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/info/id/{id}")
-    public Response eventInfo(@PathParam("id") Long id) {
+    public Response eventInfo(@PathParam("id") Integer id) {
 
         EntityManager em = emf.createEntityManager();
 
@@ -49,7 +53,7 @@ public class RsvpResource {
 
         em.persist(registration.getGuestInfo());
 
-        Long eventId = registration.getEvent().getId();
+        Integer eventId = registration.getEvent().getId();
         Event event = em.find(Event.class, eventId);
         registration.setEvent(event);
 
@@ -82,4 +86,5 @@ public class RsvpResource {
 
         return Response.ok(events.toArray()).build();
     }
+
 }

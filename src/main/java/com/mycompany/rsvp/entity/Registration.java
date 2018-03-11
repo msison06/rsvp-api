@@ -29,7 +29,8 @@ import org.apache.johnzon.mapper.JohnzonProperty;
 public class Registration implements Serializable {
 
     @Id
-    private Long id;
+    @Column(name = "ID")
+    private Integer id;
 
     @Column(name = "REG_DATE")
     @JohnzonProperty("date")
@@ -37,18 +38,17 @@ public class Registration implements Serializable {
     @JohnzonConverter(DateToMillisecondAdapter.class)
     private Date date;
 
-    @OneToOne
+    @OneToOne(mappedBy = "registration", optional = false, orphanRemoval = true)
     private RegisteredGuest guestInfo;
 
-    @JohnzonIgnore
     @ManyToOne(optional = false)
     private Event event;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -68,6 +68,7 @@ public class Registration implements Serializable {
         this.guestInfo = guestInfo;
     }
 
+    @JohnzonIgnore()
     public Event getEvent() {
         return event;
     }

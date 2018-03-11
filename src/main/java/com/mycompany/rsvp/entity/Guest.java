@@ -2,6 +2,7 @@ package com.mycompany.rsvp.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -13,16 +14,20 @@ import javax.persistence.MappedSuperclass;
 public class Guest implements Serializable {
 
     @Id
-    private Long id;
+    @Column(name = "ID")
+    private Integer id;
 
+    @Column(name = "FIRST_NAME")
     private String firstName;
+
+    @Column(name = "LAST_NAME")
     private String lastName;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -9,8 +9,11 @@ import com.mycompany.rsvp.dtoadapter.DateToMillisecondAdapter;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -29,8 +32,10 @@ import org.apache.johnzon.mapper.JohnzonProperty;
 public class Event implements Serializable {
 
     @Id
-    private Long id;
+    @Column(name = "ID")
+    private Integer id;
 
+    @Column(name = "NAME")
     private String name;
 
     @Column(name = "EVENT_DATE")
@@ -39,17 +44,17 @@ public class Event implements Serializable {
     @JohnzonConverter(DateToMillisecondAdapter.class)
     private Date date;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private Set<InvitedGuest> guestList = new HashSet<>();
 
     @OneToMany(mappedBy = "event")
     private Set<Registration> registrations = new HashSet<>();
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

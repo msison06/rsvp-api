@@ -1,7 +1,7 @@
-package com.mycompany.rsvp.ws;
+package com.sison.rsvp.register;
 
-import com.mycompany.rsvp.entity.Event;
-import com.mycompany.rsvp.entity.Registration;
+import com.sison.rsvp.entity.Event;
+import com.sison.rsvp.entity.Registration;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;

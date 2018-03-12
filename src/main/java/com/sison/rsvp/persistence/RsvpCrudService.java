@@ -1,7 +1,7 @@
-package com.mycompany.rsvp.persistence;
+package com.sison.rsvp.persistence;
 
-import com.mycompany.rsvp.sequence.Sequence;
-import com.mycompany.rsvp.sequence.SequenceService;
+import com.sison.rsvp.sequence.Sequence;
+import com.sison.rsvp.sequence.SequenceService;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;

@@ -1,6 +1,5 @@
-package com.mycompany.rsvp.admin;
+package com.sison.rsvp.admin;
 
-import com.mycompany.rsvp.event.EventResource;
 import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.security.RolesAllowed;

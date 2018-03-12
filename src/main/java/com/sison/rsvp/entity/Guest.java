@@ -1,6 +1,6 @@
-package com.mycompany.rsvp.entity;
+package com.sison.rsvp.entity;
 
-import com.mycompany.rsvp.persistence.Identifiable;
+import com.sison.rsvp.persistence.Identifiable;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;

@@ -3,22 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.rsvp.entity;
+package com.sison.rsvp.entity;
 
-import com.mycompany.rsvp.dtoadapter.DateToMillisecondAdapter;
-import com.mycompany.rsvp.persistence.Identifiable;
+import com.sison.rsvp.dtoadapter.DateToMillisecondAdapter;
+import com.sison.rsvp.persistence.Identifiable;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import org.apache.johnzon.mapper.JohnzonConverter;
-import org.apache.johnzon.mapper.JohnzonIgnore;
 import org.apache.johnzon.mapper.JohnzonProperty;
 
 /**
@@ -26,24 +26,27 @@ import org.apache.johnzon.mapper.JohnzonProperty;
  * @author Mark
  */
 @Entity
-@Table(name = "REGISTRATION")
-public class Registration implements Serializable, Identifiable<Integer> {
+@Table(name = "EVENT")
+public class Event implements Serializable, Identifiable<Integer> {
 
     @Id
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "REG_DATE")
+    @Column(name = "NAME")
+    private String name;
+
+    @Column(name = "EVENT_DATE")
     @JohnzonProperty("date")
     @Temporal(javax.persistence.TemporalType.DATE)
     @JohnzonConverter(DateToMillisecondAdapter.class)
     private Date date;
 
-    @OneToOne(mappedBy = "registration", optional = false, orphanRemoval = true)
-    private RegisteredGuest guestInfo;
+    @OneToMany(mappedBy = "event")
+    private Set<InvitedGuest> guestList = new HashSet<>();
 
-    @ManyToOne(optional = false)
-    private Event event;
+    @OneToMany(mappedBy = "event")
+    private Set<Registration> registrations = new HashSet<>();
 
     @Override
     public Integer getId() {
@@ -55,6 +58,14 @@ public class Registration implements Serializable, Identifiable<Integer> {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Date getDate() {
         return date;
     }
@@ -63,26 +74,25 @@ public class Registration implements Serializable, Identifiable<Integer> {
         this.date = date;
     }
 
-    public RegisteredGuest getGuestInfo() {
-        return guestInfo;
+    public Set<InvitedGuest> getGuestList() {
+        return guestList;
     }
 
-    public void setGuestInfo(RegisteredGuest guestInfo) {
-        this.guestInfo = guestInfo;
+    public void setGuestList(Set<InvitedGuest> guestList) {
+        this.guestList = guestList;
     }
 
-    @JohnzonIgnore()
-    public Event getEvent() {
-        return event;
+    public Set<Registration> getRegistrations() {
+        return registrations;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setRegistrations(Set<Registration> registrations) {
+        this.registrations = registrations;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 7;
         hash = 97 * hash + Objects.hashCode(this.id);
         return hash;
     }
@@ -98,7 +108,7 @@ public class Registration implements Serializable, Identifiable<Integer> {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Registration other = (Registration) obj;
+        final Event other = (Event) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }

@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.rsvp.sequence;
+package com.sison.rsvp.persistence;
 
 /**
  *
  * @author Mark
  */
-public interface Sequence<E> {
+public interface Identifiable<I> {
 
-    public E nextVal();
+    public I getId();
 
-    public E currVal();
+    public void setId(I id);
 }

@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.rsvp.sequence;
+package com.sison.rsvp.sequence;
 
-import com.mycompany.rsvp.sequence.sqlite.SqliteSequence;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

@@ -1,8 +1,7 @@
-package com.mycompany.rsvp.sequence.sqlite;
+package com.sison.rsvp.sequence;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Table;
-import com.mycompany.rsvp.sequence.Sequence;
 
 /**
  *

@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.rsvp.event;
+package com.sison.rsvp.persistence;
 
-import com.mycompany.rsvp.entity.Event;
-import com.mycompany.rsvp.persistence.RsvpCrudService;
+import com.sison.rsvp.entity.InvitedGuest;
 import javax.ejb.Stateless;
 
 /**
@@ -14,9 +13,10 @@ import javax.ejb.Stateless;
  * @author Mark
  */
 @Stateless
-public class EventService extends RsvpCrudService<Event, Integer> {
+public class InvitedGuestService extends RsvpCrudService<InvitedGuest, Integer> {
 
-    public EventService() {
-        super(Event.class);
+    public InvitedGuestService() {
+        super(InvitedGuest.class);
     }
+
 }

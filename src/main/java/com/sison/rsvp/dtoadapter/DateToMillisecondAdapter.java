@@ -1,4 +1,4 @@
-package com.mycompany.rsvp.dtoadapter;
+package com.sison.rsvp.dtoadapter;
 
 import java.util.Date;
 import org.apache.johnzon.mapper.Adapter;

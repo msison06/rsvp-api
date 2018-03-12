@@ -1,5 +1,6 @@
 package com.mycompany.rsvp.ws;
 
+import com.mycompany.rsvp.event.EventResource;
 import java.util.HashSet;
 import java.util.Set;
 import javax.ws.rs.ApplicationPath;

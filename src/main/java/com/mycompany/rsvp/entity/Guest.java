@@ -1,5 +1,6 @@
 package com.mycompany.rsvp.entity;
 
+import com.mycompany.rsvp.persistence.Identifiable;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -11,7 +12,7 @@ import javax.persistence.MappedSuperclass;
  * @author Mark
  */
 @MappedSuperclass
-public class Guest implements Serializable {
+public class Guest implements Serializable, Identifiable<Integer> {
 
     @Id
     @Column(name = "ID")
@@ -23,10 +24,12 @@ public class Guest implements Serializable {
     @Column(name = "LAST_NAME")
     private String lastName;
 
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }

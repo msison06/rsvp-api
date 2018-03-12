@@ -6,6 +6,7 @@
 package com.mycompany.rsvp.entity;
 
 import com.mycompany.rsvp.dtoadapter.DateToMillisecondAdapter;
+import com.mycompany.rsvp.persistence.Identifiable;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -26,7 +27,7 @@ import org.apache.johnzon.mapper.JohnzonProperty;
  */
 @Entity
 @Table(name = "REGISTRATION")
-public class Registration implements Serializable {
+public class Registration implements Serializable, Identifiable<Integer> {
 
     @Id
     @Column(name = "ID")
@@ -44,10 +45,12 @@ public class Registration implements Serializable {
     @ManyToOne(optional = false)
     private Event event;
 
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }

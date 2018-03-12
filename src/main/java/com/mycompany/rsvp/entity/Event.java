@@ -6,11 +6,10 @@
 package com.mycompany.rsvp.entity;
 
 import com.mycompany.rsvp.dtoadapter.DateToMillisecondAdapter;
+import com.mycompany.rsvp.persistence.Identifiable;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -29,7 +28,7 @@ import org.apache.johnzon.mapper.JohnzonProperty;
  */
 @Entity
 @Table(name = "EVENT")
-public class Event implements Serializable {
+public class Event implements Serializable, Identifiable<Integer> {
 
     @Id
     @Column(name = "ID")
@@ -50,10 +49,12 @@ public class Event implements Serializable {
     @OneToMany(mappedBy = "event")
     private Set<Registration> registrations = new HashSet<>();
 
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }

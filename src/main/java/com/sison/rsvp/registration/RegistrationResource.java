@@ -5,8 +5,12 @@
  */
 package com.sison.rsvp.registration;
 
+import com.sison.rsvp.entity.Registration;
+import com.sison.rsvp.ws.CrudResource;
+import javax.annotation.PostConstruct;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.Path;
 
 /**
@@ -16,6 +20,13 @@ import javax.ws.rs.Path;
 @Stateless
 @Path("/regisration")
 @RolesAllowed({"rsvpadmin"})
-public class RegistrationResource {
+public class RegistrationResource extends CrudResource<Registration, Integer> {
 
+    @Inject
+    protected RegistrationService registrationService;
+
+    @PostConstruct
+    private void postConstruct() {
+        setCrudService(registrationService);
+    }
 }

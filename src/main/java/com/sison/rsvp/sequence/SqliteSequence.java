@@ -24,8 +24,9 @@ public class SqliteSequence implements Sequence<Integer> {
 
     @Override
     public Integer nextVal() {
-        increment(currVal());
-        return currVal();
+        int currentValue = currVal();
+        increment(currentValue);
+        return currentValue;
     }
 
     private void increment(Integer current) {

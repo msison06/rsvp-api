@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sison.rsvp.admin;
+package com.sison.rsvp.guest;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;

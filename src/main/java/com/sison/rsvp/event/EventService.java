@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sison.rsvp.admin;
+package com.sison.rsvp.event;
 
-import javax.annotation.security.RolesAllowed;
+import com.sison.rsvp.entity.Event;
+import com.sison.rsvp.persistence.RsvpCrudService;
 import javax.ejb.Stateless;
 
 /**
@@ -13,7 +14,9 @@ import javax.ejb.Stateless;
  * @author Mark
  */
 @Stateless
-@RolesAllowed({"rsvpadmin"})
-public class RegistrationResource {
+public class EventService extends RsvpCrudService<Event, Integer> {
 
+    public EventService() {
+        super(Event.class);
+    }
 }

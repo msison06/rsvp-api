@@ -1,11 +1,10 @@
-package com.sison.rsvp.register;
+package com.sison.rsvp.registration;
 
 import com.sison.rsvp.entity.Event;
 import com.sison.rsvp.entity.RegisteredGuest;
 import com.sison.rsvp.entity.Registration;
-import com.sison.rsvp.persistence.EventService;
-import com.sison.rsvp.persistence.RegisteredGuestService;
-import com.sison.rsvp.persistence.RegistrationService;
+import com.sison.rsvp.event.EventService;
+import com.sison.rsvp.guest.RegisteredGuestService;
 import java.util.Date;
 import javax.ejb.Stateless;
 import javax.inject.Inject;

@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sison.rsvp.admin;
+package com.sison.rsvp.event;
 
 import com.sison.rsvp.entity.Event;
-import com.sison.rsvp.persistence.EventService;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
@@ -66,7 +65,7 @@ public class EventResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("")
-    public Response event(Event event) {
+    public Response update(Event event) {
         event = eventService.update(event.getId(), event);
 
         return Response.ok(event).build();

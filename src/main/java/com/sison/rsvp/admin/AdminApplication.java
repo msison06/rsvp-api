@@ -1,5 +1,6 @@
 package com.sison.rsvp.admin;
 
+import com.sison.rsvp.event.EventResource;
 import com.sison.rsvp.guest.GuestResource;
 import java.util.HashSet;
 import java.util.Set;

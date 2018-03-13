@@ -1,4 +1,4 @@
-package com.sison.rsvp.register;
+package com.sison.rsvp.registration;
 
 import com.sison.rsvp.entity.Event;
 import com.sison.rsvp.entity.Registration;

@@ -1,4 +1,4 @@
-package com.sison.rsvp.register;
+package com.sison.rsvp.registration;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sison.rsvp.persistence;
+package com.sison.rsvp.registration;
 
-import com.sison.rsvp.entity.Event;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
+import javax.ws.rs.Path;
 
 /**
  *
  * @author Mark
  */
 @Stateless
-public class EventService extends RsvpCrudService<Event, Integer> {
+@Path("/regisration")
+@RolesAllowed({"rsvpadmin"})
+public class RegistrationResource {
 
-    public EventService() {
-        super(Event.class);
-    }
 }

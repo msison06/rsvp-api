@@ -5,6 +5,7 @@
  */
 package com.sison.rsvp.admin;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 
 /**
@@ -12,6 +13,7 @@ import javax.ejb.Stateless;
  * @author Mark
  */
 @Stateless
+@RolesAllowed({"rsvpadmin"})
 public class RegisteredGuestResource {
 
 }

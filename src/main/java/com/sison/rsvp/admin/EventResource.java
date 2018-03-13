@@ -28,6 +28,7 @@ import javax.ws.rs.core.Response;
  */
 @Stateless
 @Path("/event")
+@RolesAllowed({"rsvpadmin"})
 public class EventResource {
 
     @Inject

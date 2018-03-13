@@ -2,7 +2,6 @@ package com.sison.rsvp.admin;
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
@@ -11,7 +10,6 @@ import javax.ws.rs.core.Application;
  * @author Mark
  */
 @ApplicationPath("/admin")
-@RolesAllowed({"rsvpadmin"})
 public class AdminApplication extends Application {
 
     @Override

@@ -5,8 +5,10 @@
  */
 package com.sison.rsvp.guest;
 
-import com.sison.rsvp.entity.Event;
 import com.sison.rsvp.entity.Guest;
+import com.sison.rsvp.entity.InvitedGuest;
+import com.sison.rsvp.entity.RegisteredGuest;
+import com.sison.rsvp.entity.Registration;
 import java.io.Serializable;
 
 /**
@@ -15,16 +17,16 @@ import java.io.Serializable;
  */
 public class ExpectedGuest extends Guest implements Serializable {
 
-    private Event event;
     private Integer estAdditionalGuests;
     private Integer additionalGuests;
 
-    public Event getEvent() {
-        return event;
-    }
+    private Registration registration;
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public ExpectedGuest(InvitedGuest inv, RegisteredGuest reg) {
+        this.setFirstName(inv.getFirstName());
+        this.setLastName(inv.getLastName());
+        estAdditionalGuests = inv.getEstAdditionalGuests();
+        additionalGuests = reg.getAdditionalGuests();
     }
 
     public Integer getEstAdditionalGuests() {

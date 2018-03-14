@@ -28,7 +28,7 @@ public class GuestResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/expected/eventid/{id}")
     public Response getExpectedGuests(@PathParam("id") Integer id) {
-        List<ExpectedGuest> expected = guestService.getExpectedGuests(id);
+        List<ConfirmedGuest> expected = guestService.getConfirmedGuests(id);
         return Response.ok(expected.toArray()).build();
     }
 
@@ -44,7 +44,7 @@ public class GuestResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/underestimated/eventid/{id}")
     public Response getUnderestimated(@PathParam("id") Integer id) {
-        List<ExpectedGuest> underestimated = guestService.getUnderestimated(id);
+        List<ConfirmedGuest> underestimated = guestService.getUnderestimated(id);
         return Response.ok(underestimated.toArray()).build();
     }
 

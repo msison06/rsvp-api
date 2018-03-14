@@ -16,14 +16,14 @@ import java.util.List;
  *
  * @author Mark
  */
-public class ExpectedGuest extends Guest implements Serializable {
+public class ConfirmedGuest extends Guest implements Serializable {
 
     private Integer estAdditionalGuests;
     private Integer additionalGuests;
 
     private List<Registration> registrations = new LinkedList<>();
 
-    public ExpectedGuest(InvitedGuest inv, Registration registration) {
+    public ConfirmedGuest(InvitedGuest inv, Registration registration) {
         this.firstName = inv.getFirstName();
         this.lastName = inv.getLastName();
         estAdditionalGuests = inv.getEstAdditionalGuests();

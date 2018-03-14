@@ -42,28 +42,28 @@ public class GuestService {
 
     private final String AND_UNDERESTIMATED = "and inv.estAdditionalGuests < reg.additionalGuests ";
 
-    public List<ExpectedGuest> getExpectedGuests(Integer eventId) {
+    public List<ConfirmedGuest> getConfirmedGuests(Integer eventId) {
 
         List<Object[]> result = em.createQuery(EXPECTED)
                 .setParameter("id", eventId)
                 .getResultList();
 
-        return convertToExpectedGuests(result);
+        return convertToConfirmedGuests(result);
     }
 
-    public List<ExpectedGuest> getUnderestimated(Integer eventId) {
+    public List<ConfirmedGuest> getUnderestimated(Integer eventId) {
         List<Object[]> result = em.createQuery(EXPECTED + AND_UNDERESTIMATED)
                 .setParameter("id", eventId)
                 .getResultList();
 
-        return convertToExpectedGuests(result);
+        return convertToConfirmedGuests(result);
     }
 
-    private List<ExpectedGuest> convertToExpectedGuests(List<Object[]> guests) {
-        List<ExpectedGuest> expectedGuests;
+    private List<ConfirmedGuest> convertToConfirmedGuests(List<Object[]> guests) {
+        List<ConfirmedGuest> expectedGuests;
 
         expectedGuests = guests.stream().map(g -> {
-            return new ExpectedGuest((InvitedGuest) g[0], (Registration) g[1]);
+            return new ConfirmedGuest((InvitedGuest) g[0], (Registration) g[1]);
         }).collect(Collectors.toList());
 
         return expectedGuests;

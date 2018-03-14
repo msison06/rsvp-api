@@ -27,7 +27,7 @@ import org.apache.johnzon.mapper.JohnzonProperty;
  */
 @Entity
 @Table(name = "REGISTRATION")
-public class Registration implements Serializable, Identifiable<Integer> {
+public class Registration extends Guest implements Serializable, Identifiable<Integer> {
 
     @Id
     @Column(name = "ID")
@@ -39,11 +39,11 @@ public class Registration implements Serializable, Identifiable<Integer> {
     @JohnzonConverter(DateToMillisecondAdapter.class)
     private Date date;
 
-    @OneToOne(mappedBy = "registration", optional = false, orphanRemoval = true)
-    private RegisteredGuest guestInfo;
-
     @ManyToOne(optional = false)
     private Event event;
+
+    @Column(name = "ADDITIONAL_GUESTS")
+    private Integer additionalGuests;
 
     @Override
     public Integer getId() {
@@ -63,14 +63,6 @@ public class Registration implements Serializable, Identifiable<Integer> {
         this.date = date;
     }
 
-    public RegisteredGuest getGuestInfo() {
-        return guestInfo;
-    }
-
-    public void setGuestInfo(RegisteredGuest guestInfo) {
-        this.guestInfo = guestInfo;
-    }
-
     @JohnzonIgnore()
     public Event getEvent() {
         return event;
@@ -78,6 +70,14 @@ public class Registration implements Serializable, Identifiable<Integer> {
 
     public void setEvent(Event event) {
         this.event = event;
+    }
+
+    public Integer getAdditionalGuests() {
+        return additionalGuests;
+    }
+
+    public void setAdditionalGuests(Integer additionalGuests) {
+        this.additionalGuests = additionalGuests;
     }
 
     @Override

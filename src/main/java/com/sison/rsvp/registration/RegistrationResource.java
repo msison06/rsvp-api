@@ -18,7 +18,7 @@ import javax.ws.rs.Path;
  * @author Mark
  */
 @Stateless
-@Path("/regisration")
+@Path("/regisrations")
 @RolesAllowed({"rsvpadmin"})
 public class RegistrationResource extends CrudResource<Registration, Integer> {
 

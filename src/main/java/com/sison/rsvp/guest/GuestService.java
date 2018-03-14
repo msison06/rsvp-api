@@ -6,7 +6,6 @@
 package com.sison.rsvp.guest;
 
 import com.sison.rsvp.entity.InvitedGuest;
-import com.sison.rsvp.entity.RegisteredGuest;
 import com.sison.rsvp.entity.Registration;
 import com.sison.rsvp.registration.RegistrationService;
 import java.util.LinkedList;
@@ -31,14 +30,14 @@ public class GuestService {
     protected InvitedGuestService invGuestService;
 
     @Inject
-    protected RegisteredGuestService regGuestService;
+    protected RegistrationService regService;
 
     private final String EXPECTED = "select inv, reg from "
-            + "InvitedGuest as inv, RegisteredGuest as reg "
+            + "InvitedGuest as inv, Registration as reg "
             + "where "
             + "inv.firstName = reg.firstName "
             + "and inv.lastName = reg.lastName "
-            + "and reg.registration.event.id = :id "
+            + "and reg.event.id = :id "
             + "and inv.event.id = :id ";
 
     private final String AND_UNDERESTIMATED = "and inv.estAdditionalGuests < reg.additionalGuests ";
@@ -64,14 +63,14 @@ public class GuestService {
         List<ExpectedGuest> expectedGuests;
 
         expectedGuests = guests.stream().map(g -> {
-            return new ExpectedGuest((InvitedGuest) g[0], (RegisteredGuest) g[1]);
+            return new ExpectedGuest((InvitedGuest) g[0], (Registration) g[1]);
         }).collect(Collectors.toList());
 
         return expectedGuests;
     }
 
     public List<Registration> getNonInvitedGuests(Integer eventId) {
-        String selectWhereNotExist = "select r.guestInfo from Registration as r where NOT EXISTS(" + EXPECTED + ")";
+        String selectWhereNotExist = "select r from Registration as r where NOT EXISTS(" + EXPECTED + ")";
 
         List<Registration> registrations = em.createQuery(selectWhereNotExist)
                 .setParameter("id", eventId)
@@ -80,9 +79,6 @@ public class GuestService {
         return registrations;
     }
 
-    @Inject
-    protected RegistrationService regService;
-
     public List<List<Registration>> getDuplicateRegistrations(Integer eventId) {
         List<List<Registration>> regss = new LinkedList<>();
 //select rs from Registration rs where exists
@@ -90,12 +86,12 @@ public class GuestService {
 //                .setParameter("id", eventId)
 //                .getResultList();
 
-        List<Object[]> distinctNames = em.createQuery("select distinct r.guestInfo.firstName, r.guestInfo.lastName from Registration r where r.event.id = :id group by r.guestInfo.firstName, r.guestInfo.lastName having count(r) > 1")
+        List<Object[]> distinctNames = em.createQuery("select distinct r.firstName, r.lastName from Registration r where r.event.id = :id group by r.firstName, r.lastName having count(r) > 1")
                 .setParameter("id", eventId)
                 .getResultList();
 
         distinctNames.forEach(names -> {
-            List<Registration> registrations = em.createQuery("select r from Registration as r where r.guestInfo.firstName = :firstName and r.guestInfo.lastName = :lastName")
+            List<Registration> registrations = em.createQuery("select r from Registration as r where r.firstName = :firstName and r.lastName = :lastName")
                     .setParameter("firstName", names[0])
                     .setParameter("lastName", names[1])
                     .getResultList();

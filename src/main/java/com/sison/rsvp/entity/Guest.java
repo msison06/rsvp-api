@@ -16,13 +16,13 @@ public class Guest implements Serializable, Identifiable<Integer> {
 
     @Id
     @Column(name = "ID")
-    private Integer id;
+    protected Integer id;
 
     @Column(name = "FIRST_NAME")
-    private String firstName;
+    protected String firstName;
 
     @Column(name = "LAST_NAME")
-    private String lastName;
+    protected String lastName;
 
     @Override
     public Integer getId() {

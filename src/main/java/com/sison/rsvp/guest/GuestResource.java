@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response;
  * @author Mark
  */
 @Stateless
-@Path("/guest")
+@Path("/guests")
 @RolesAllowed({"rsvpadmin"})
 public class GuestResource {
 

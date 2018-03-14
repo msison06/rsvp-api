@@ -18,7 +18,7 @@ import javax.ws.rs.Path;
  * @author Mark
  */
 @Stateless
-@Path("/event")
+@Path("/events")
 @RolesAllowed({"rsvpadmin"})
 public class EventResource extends CrudResource<Event, Integer> {
 

@@ -7,9 +7,10 @@ package com.sison.rsvp.guest;
 
 import com.sison.rsvp.entity.Guest;
 import com.sison.rsvp.entity.InvitedGuest;
-import com.sison.rsvp.entity.RegisteredGuest;
 import com.sison.rsvp.entity.Registration;
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -20,13 +21,13 @@ public class ExpectedGuest extends Guest implements Serializable {
     private Integer estAdditionalGuests;
     private Integer additionalGuests;
 
-    private Registration registration;
+    private List<Registration> registrations = new LinkedList<>();
 
-    public ExpectedGuest(InvitedGuest inv, RegisteredGuest reg) {
-        this.setFirstName(inv.getFirstName());
-        this.setLastName(inv.getLastName());
+    public ExpectedGuest(InvitedGuest inv, Registration registration) {
+        this.firstName = inv.getFirstName();
+        this.lastName = inv.getLastName();
         estAdditionalGuests = inv.getEstAdditionalGuests();
-        additionalGuests = reg.getAdditionalGuests();
+        registrations.add(registration);
     }
 
     public Integer getEstAdditionalGuests() {
@@ -43,5 +44,13 @@ public class ExpectedGuest extends Guest implements Serializable {
 
     public void setAdditionalGuests(Integer additionalGuests) {
         this.additionalGuests = additionalGuests;
+    }
+
+    public List<Registration> getRegistrations() {
+        return registrations;
+    }
+
+    public void setRegistrations(List<Registration> registrations) {
+        this.registrations = registrations;
     }
 }

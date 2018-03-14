@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.Path;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,6 +18,7 @@ import javax.inject.Inject;
  * @author Mark
  */
 @Stateless
+@Path("/invitedguests")
 @RolesAllowed({"rsvpadmin"})
 public class InvitedGuestResource extends CrudResource<InvitedGuest, Integer> {
 

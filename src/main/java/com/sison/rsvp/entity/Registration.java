@@ -29,10 +29,6 @@ import org.apache.johnzon.mapper.JohnzonProperty;
 @Table(name = "REGISTRATION")
 public class Registration extends Guest implements Serializable, Identifiable<Integer> {
 
-    @Id
-    @Column(name = "ID")
-    private Integer id;
-
     @Column(name = "REG_DATE")
     @JohnzonProperty("date")
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -44,16 +40,6 @@ public class Registration extends Guest implements Serializable, Identifiable<In
 
     @Column(name = "ADDITIONAL_GUESTS")
     private Integer additionalGuests;
-
-    @Override
-    public Integer getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Date getDate() {
         return date;

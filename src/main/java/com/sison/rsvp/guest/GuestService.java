@@ -32,59 +32,51 @@ public class GuestService {
     @Inject
     protected RegistrationService regService;
 
-    private final String EXPECTED = "select inv, reg from "
-            + "InvitedGuest as inv, Registration as reg "
-            + "where "
-            + "inv.firstName = reg.firstName "
-            + "and inv.lastName = reg.lastName "
-            + "and reg.event.id = :id "
-            + "and inv.event.id = :id ";
-
-    private final String AND_UNDERESTIMATED = "and inv.estAdditionalGuests < reg.additionalGuests ";
-
     public List<ConfirmedGuest> getConfirmedGuests(Integer eventId) {
+        List<InvitedGuest> invites = invGuestService.getByEvent(eventId);
+        List<ConfirmedGuest> confirmed;
 
-        List<Object[]> result = em.createQuery(EXPECTED)
-                .setParameter("id", eventId)
-                .getResultList();
+        confirmed = invites.stream().map(i -> {
+            return new ConfirmedGuest(i, regService.getByInvite(i));
+        }).collect(Collectors.toList());
 
-        return convertToConfirmedGuests(result);
+        return confirmed;
     }
 
     public List<ConfirmedGuest> getUnderestimated(Integer eventId) {
-        List<Object[]> result = em.createQuery(EXPECTED + AND_UNDERESTIMATED)
-                .setParameter("id", eventId)
-                .getResultList();
-
-        return convertToConfirmedGuests(result);
+        List<ConfirmedGuest> confirmed = getConfirmedGuests(eventId);
+        return confirmed.stream().filter(guest -> isUnderestimated(guest)).collect(Collectors.toList());
     }
 
-    private List<ConfirmedGuest> convertToConfirmedGuests(List<Object[]> guests) {
-        List<ConfirmedGuest> expectedGuests;
-
-        expectedGuests = guests.stream().map(g -> {
-            return new ConfirmedGuest((InvitedGuest) g[0], (Registration) g[1]);
-        }).collect(Collectors.toList());
-
-        return expectedGuests;
+    private boolean isUnderestimated(ConfirmedGuest guest) {
+        for (Registration r : guest.getRegistrations()) {
+            if (r.getAdditionalGuests() > guest.getEstAdditionalGuests()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public List<Registration> getNonInvitedGuests(Integer eventId) {
-        String selectWhereNotExist = "select r from Registration as r where NOT EXISTS(" + EXPECTED + ")";
+        List<Registration> nonInvited = new LinkedList(regService.getByEvent(eventId));
+        nonInvited.removeAll(invitedRegistrations(eventId));
 
-        List<Registration> registrations = em.createQuery(selectWhereNotExist)
-                .setParameter("id", eventId)
-                .getResultList();
+        return nonInvited;
+    }
 
-        return registrations;
+    private List<Registration> invitedRegistrations(Integer eventId) {
+        List<InvitedGuest> invites = invGuestService.getByEvent(eventId);
+
+        List<Registration> invitedRegistrations = new LinkedList<>();
+        invites.forEach((invite) -> {
+            invitedRegistrations.addAll(regService.getByInvite(invite));
+        });
+
+        return invitedRegistrations;
     }
 
     public List<List<Registration>> getDuplicateRegistrations(Integer eventId) {
         List<List<Registration>> regss = new LinkedList<>();
-//select rs from Registration rs where exists
-//        List<Registration> registrations = em.createQuery("select r from Registration as r where r.event.id = :id group by r.guestInfo.firstName, r.guestInfo.lastName having count(r) > 1")
-//                .setParameter("id", eventId)
-//                .getResultList();
 
         List<Object[]> distinctNames = em.createQuery("select distinct r.firstName, r.lastName from Registration r where r.event.id = :id group by r.firstName, r.lastName having count(r) > 1")
                 .setParameter("id", eventId)

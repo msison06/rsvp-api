@@ -19,15 +19,13 @@ import java.util.List;
 public class ConfirmedGuest extends Guest implements Serializable {
 
     private Integer estAdditionalGuests;
-    private Integer additionalGuests;
+    private List<Registration> registrations;
 
-    private List<Registration> registrations = new LinkedList<>();
-
-    public ConfirmedGuest(InvitedGuest inv, Registration registration) {
+    public ConfirmedGuest(InvitedGuest inv, List<Registration> registrations) {
         this.firstName = inv.getFirstName();
         this.lastName = inv.getLastName();
         estAdditionalGuests = inv.getEstAdditionalGuests();
-        registrations.add(registration);
+        this.registrations = registrations;
     }
 
     public Integer getEstAdditionalGuests() {
@@ -36,14 +34,6 @@ public class ConfirmedGuest extends Guest implements Serializable {
 
     public void setEstAdditionalGuests(Integer estAdditionalGuests) {
         this.estAdditionalGuests = estAdditionalGuests;
-    }
-
-    public Integer getAdditionalGuests() {
-        return additionalGuests;
-    }
-
-    public void setAdditionalGuests(Integer additionalGuests) {
-        this.additionalGuests = additionalGuests;
     }
 
     public List<Registration> getRegistrations() {

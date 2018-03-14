@@ -7,6 +7,7 @@ package com.sison.rsvp.guest;
 
 import com.sison.rsvp.entity.InvitedGuest;
 import com.sison.rsvp.persistence.RsvpCrudService;
+import java.util.List;
 import javax.ejb.Stateless;
 
 /**
@@ -20,4 +21,9 @@ public class InvitedGuestService extends RsvpCrudService<InvitedGuest, Integer> 
         super(InvitedGuest.class);
     }
 
+    public List<InvitedGuest> getByEvent(Integer eventId) {
+        return em.createQuery("select g from InvitedGuest as g where g.event.id = :id")
+                .setParameter("id", eventId)
+                .getResultList();
+    }
 }

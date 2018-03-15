@@ -35,6 +35,18 @@ public abstract class CrudService<E, I> {
         return (E) input;
     }
 
+    public boolean exists(I id) {
+        Long count = (Long) em.createQuery("select count(e) from " + entityClass.getSimpleName() + " as e where e.id = :id")
+                .setParameter("id", id)
+                .getSingleResult();
+
+        if (count == 0) {
+            return false;
+        }
+
+        return true;
+    }
+
     public E get(I id) {
         E record = (E) em.find(entityClass, id);
         if (record == null) {

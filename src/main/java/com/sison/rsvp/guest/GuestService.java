@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.sison.rsvp.guest;
 
 import com.sison.rsvp.entity.InvitedGuest;
@@ -36,16 +31,20 @@ public class GuestService {
         List<InvitedGuest> invites = invGuestService.getByEvent(eventId);
         List<ConfirmedGuest> confirmed;
 
-        confirmed = invites.stream().map(i -> {
-            return new ConfirmedGuest(i, regService.getByInvite(i));
-        }).collect(Collectors.toList());
+        confirmed = invites.stream()
+                .map(i -> {
+                    return new ConfirmedGuest(i, regService.getByInvite(i));
+                })
+                .collect(Collectors.toList());
 
         return confirmed;
     }
 
     public List<ConfirmedGuest> getUnderestimated(Integer eventId) {
         List<ConfirmedGuest> confirmed = getConfirmedGuests(eventId);
-        return confirmed.stream().filter(guest -> isUnderestimated(guest)).collect(Collectors.toList());
+        return confirmed.stream()
+                .filter(guest -> isUnderestimated(guest))
+                .collect(Collectors.toList());
     }
 
     private boolean isUnderestimated(ConfirmedGuest guest) {

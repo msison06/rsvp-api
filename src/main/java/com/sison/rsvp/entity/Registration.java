@@ -41,6 +41,10 @@ public class Registration extends Guest implements Serializable, Identifiable<In
     @Column(name = "ADDITIONAL_GUESTS")
     private Integer additionalGuests;
 
+    public Registration() {
+        additionalGuests = 0;
+    }
+
     public Date getDate() {
         return date;
     }

@@ -5,10 +5,8 @@
  */
 package com.sison.rsvp.entity;
 
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.apache.johnzon.mapper.JohnzonIgnore;
@@ -27,6 +25,10 @@ public class InvitedGuest extends Guest {
 
     @Column(name = "EST_ADDITIONAL_GUESTS")
     private Integer estAdditionalGuests;
+
+    public InvitedGuest() {
+        estAdditionalGuests = 0;
+    }
 
     @JohnzonIgnore
     public Event getEvent() {

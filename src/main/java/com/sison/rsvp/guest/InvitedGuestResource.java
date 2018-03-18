@@ -8,12 +8,8 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
+ * Resource layer for invitations
  *
  * @author Mark
  */
@@ -27,6 +23,8 @@ public class InvitedGuestResource extends CrudResource<InvitedGuest, Integer> {
 
     @PostConstruct
     private void postConstruct() {
+        //set superclass's crud service in post construct so dependencies have
+        //already been injected
         setCrudService(invitedGuestService);
     }
 }

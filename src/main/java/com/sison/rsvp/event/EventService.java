@@ -10,6 +10,7 @@ import com.sison.rsvp.persistence.RsvpCrudService;
 import javax.ejb.Stateless;
 
 /**
+ * Service layer for basic crud on the event entity
  *
  * @author Mark
  */

@@ -13,6 +13,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 /**
+ * Top layer exception handling for UserInputException to reduce handling them
+ * in code.
  *
  * @author Mark
  */
@@ -22,6 +24,8 @@ public class UserInputExceptionMapper implements ExceptionMapper<UserInputExcept
     @Override
     @Produces(MediaType.APPLICATION_JSON)
     public Response toResponse(UserInputException e) {
+        //Send back the list of problems for the frontend guys. This will most
+        //likely be useful for user input on forms
         return Response.status(Response.Status.BAD_REQUEST).entity(e.getProblems()).build();
     }
 }

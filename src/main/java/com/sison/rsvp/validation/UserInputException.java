@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.sison.rsvp.validation;
 
 import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * Exception for user input
  *
  * @author Mark
  */
@@ -16,18 +12,38 @@ public class UserInputException extends RuntimeException {
 
     List<Problem> problems = new LinkedList<>();
 
+    /**
+     * Add a problem
+     *
+     * @param problem
+     */
     public UserInputException(Problem problem) {
         problems.add(problem);
     }
 
+    /**
+     * Add problems
+     *
+     * @param problems
+     */
     public UserInputException(List<Problem> problems) {
         this.problems = problems;
     }
 
+    /**
+     * Add problems from a validation result
+     *
+     * @param r
+     */
     public UserInputException(ValidationResult r) {
         this.problems = r.getProblems();
     }
 
+    /**
+     * retrieve the problems that caused the user input exception
+     *
+     * @return
+     */
     public List<Problem> getProblems() {
         return problems;
     }

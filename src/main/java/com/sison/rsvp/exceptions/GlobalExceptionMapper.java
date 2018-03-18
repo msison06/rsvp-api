@@ -6,18 +6,16 @@
 package com.sison.rsvp.exceptions;
 
 import com.sison.rsvp.validation.Problem;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 /**
+ * Top layer exception handling for any kind of exception to reduce handling any
+ * other uncaught ones in the code. If there exists a more specific
+ * ExceptionMapper for an exception, then that will be chosen instead.
  *
  * @author Mark
  */
@@ -27,6 +25,7 @@ public class GlobalExceptionMapper implements ExceptionMapper<Exception> {
     @Override
     @Produces(MediaType.APPLICATION_JSON)
     public Response toResponse(Exception e) {
+        //Hide the internal implementation (server, code, etc.) from the user
         Problem error = new Problem();
         error.setMessage("Oops! Something went wrong!");
         error.setMessage("Internal Server Error: Contact Administrator");

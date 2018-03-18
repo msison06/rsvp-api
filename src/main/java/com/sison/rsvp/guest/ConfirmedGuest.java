@@ -1,18 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.sison.rsvp.guest;
 
 import com.sison.rsvp.entity.Guest;
 import com.sison.rsvp.entity.InvitedGuest;
 import com.sison.rsvp.entity.Registration;
 import java.io.Serializable;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * ConfirmedGuests are guests that were both invited and have already registered
  *
  * @author Mark
  */
@@ -36,6 +31,13 @@ public class ConfirmedGuest extends Guest implements Serializable {
         this.estAdditionalGuests = estAdditionalGuests;
     }
 
+    /**
+     * If a user has registered more than one time (by mistake or on purpose),
+     * this wrapper will capture that. This function returns all registrations
+     * for this guest.
+     *
+     * @return
+     */
     public List<Registration> getRegistrations() {
         return registrations;
     }

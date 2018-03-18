@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.sison.rsvp.registration;
 
 import com.sison.rsvp.entity.Registration;
@@ -12,6 +7,7 @@ import com.sison.rsvp.validation.ValidationResult;
 import com.sison.rsvp.validation.Validator;
 
 /**
+ * Handles validation for registrations
  *
  * @author Mark
  */
@@ -23,6 +19,12 @@ public class RegistrationValidator extends Validator<Registration> {
         this.eService = eService;
     }
 
+    /**
+     * Validates a registration
+     *
+     * @param reg the registration
+     * @return
+     */
     @Override
     public ValidationResult validate(Registration reg) {
         ValidationResult result;
@@ -42,6 +44,12 @@ public class RegistrationValidator extends Validator<Registration> {
         return result;
     }
 
+    /**
+     * Check if a registration has all the required fields
+     *
+     * @param reg the registration
+     * @return
+     */
     public ValidationResult hasRequiredFields(Registration reg) {
         ValidationResult r = new ValidationResult();
 
@@ -50,16 +58,29 @@ public class RegistrationValidator extends Validator<Registration> {
         r.addProblems(checkFieldNullOrEmpty("Event", reg.getEvent()));
 
         if (reg.getEvent() != null) {
+            //Make sure the given event object also has an id associated with it so we can tie to it.
             r.addProblems(checkFieldNullOrEmpty("Registration Event Id", reg.getEvent().getId()));
         }
 
         return r;
     }
 
+    /**
+     * Check if the an event exists
+     *
+     * @param eventId
+     * @return
+     */
     private boolean eventExists(Integer eventId) {
         return eService.exists(eventId);
     }
 
+    /**
+     * Create a problem representing that an event doesn't exist
+     *
+     * @param eventId
+     * @return
+     */
     private Problem eventDoesntExist(Integer eventId) {
         Problem p = new Problem();
         p.setSummary("Registration failed");

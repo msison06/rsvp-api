@@ -10,6 +10,7 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 /**
+ * Application layer for admin webservices
  *
  * @author Mark
  */

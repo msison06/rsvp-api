@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.sison.rsvp.entity;
 
 import com.sison.rsvp.dtoadapter.DateToMillisecondAdapter;
@@ -12,9 +7,7 @@ import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import org.apache.johnzon.mapper.JohnzonConverter;
@@ -22,6 +15,7 @@ import org.apache.johnzon.mapper.JohnzonIgnore;
 import org.apache.johnzon.mapper.JohnzonProperty;
 
 /**
+ * Entity definition for registrations
  *
  * @author Mark
  */

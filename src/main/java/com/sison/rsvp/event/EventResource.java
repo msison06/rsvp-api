@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.sison.rsvp.event;
 
 import com.sison.rsvp.entity.Event;
@@ -14,6 +9,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Path;
 
 /**
+ * Resource layer for events
  *
  * @author Mark
  */
@@ -27,6 +23,8 @@ public class EventResource extends CrudResource<Event, Integer> {
 
     @PostConstruct
     private void postConstruct() {
+        //set superclass's crud service in post construct so dependencies have
+        //already been injected
         setCrudService(eventService);
     }
 }

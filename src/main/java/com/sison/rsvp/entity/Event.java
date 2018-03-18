@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.sison.rsvp.entity;
 
 import com.sison.rsvp.dtoadapter.DateToMillisecondAdapter;
@@ -22,6 +17,7 @@ import org.apache.johnzon.mapper.JohnzonConverter;
 import org.apache.johnzon.mapper.JohnzonProperty;
 
 /**
+ * Entity definition for Events
  *
  * @author Mark
  */

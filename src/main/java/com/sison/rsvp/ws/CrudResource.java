@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.sison.rsvp.ws;
 
-import com.sison.rsvp.entity.Event;
 import com.sison.rsvp.persistence.CrudService;
 import com.sison.rsvp.persistence.Identifiable;
 import java.util.List;
@@ -21,17 +15,31 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
+ * Generic resource layer for crud services
  *
  * @author Mark
+ * @param <E> Entity class
+ * @param <I> id of the entity
  */
 public abstract class CrudResource<E extends Identifiable<I>, I> {
 
     protected CrudService<E, I> crudService;
 
+    /**
+     * Set the crud service to use for the resource
+     *
+     * @param crudService
+     */
     public void setCrudService(CrudService<E, I> crudService) {
         this.crudService = crudService;
     }
 
+    /**
+     * Endpoint to create an entity
+     *
+     * @param entity
+     * @return
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -42,6 +50,11 @@ public abstract class CrudResource<E extends Identifiable<I>, I> {
         return Response.ok(entity).build();
     }
 
+    /**
+     * Endpoint to retrieve all records for an entity
+     *
+     * @return
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("")
@@ -51,15 +64,27 @@ public abstract class CrudResource<E extends Identifiable<I>, I> {
         return Response.ok(entities.toArray()).build();
     }
 
+    /**
+     * Retrieve one record with a given id
+     *
+     * @param id
+     * @return
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/id/{id}")
-    public Response eventInfo(@PathParam("id") I id) {
+    public Response get(@PathParam("id") I id) {
         E entity = crudService.get(id);
 
         return Response.ok(entity).build();
     }
 
+    /**
+     * Edit an entity
+     *
+     * @param entity entity to edit
+     * @return
+     */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -70,6 +95,12 @@ public abstract class CrudResource<E extends Identifiable<I>, I> {
         return Response.ok(entity).build();
     }
 
+    /**
+     * Delete an entity
+     *
+     * @param id if of entity to delete
+     * @return
+     */
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/id/{id}")

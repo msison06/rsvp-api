@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.sison.rsvp.exceptions;
 
 import com.sison.rsvp.validation.Problem;
@@ -14,6 +9,8 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 /**
+ * Top layer exception handling for EntityNotFoundExceptions to reduce handling
+ * them in code.
  *
  * @author Mark
  */
@@ -23,6 +20,9 @@ public class EntityNotFoundExceptionMapper implements ExceptionMapper<EntityNotF
     @Override
     @Produces(MediaType.APPLICATION_JSON)
     public Response toResponse(EntityNotFoundException e) {
+        //Pack in an error that describes that an entity wasn't found.
+        //This is more for frontend developers than end users since it'll only
+        //show an id
         Problem error = new Problem();
         error.setSummary("Not Found");
         error.setMessage(e.getMessage());

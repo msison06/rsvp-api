@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import org.apache.johnzon.mapper.JohnzonIgnore;
 
 /**
+ * Entity definition for invitations
  *
  * @author Mark
  */

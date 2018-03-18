@@ -6,6 +6,7 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 /**
+ * Application for rsvp endpoints.
  *
  * @author Mark
  */

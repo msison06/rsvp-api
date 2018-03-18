@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
+ * Resource layer for admin guest utility functions
  *
  * @author Mark
  */

@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 /**
+ * Service layer for basic crud on the invitation entity
  *
  * @author Mark
  */
@@ -21,6 +22,12 @@ public class InvitedGuestService extends RsvpCrudService<InvitedGuest, Integer> 
         super(InvitedGuest.class);
     }
 
+    /**
+     * Get a list of invitations based on the event id
+     *
+     * @param eventId id of the event
+     * @return
+     */
     public List<InvitedGuest> getByEvent(Integer eventId) {
         return em.createQuery("select g from InvitedGuest as g where g.event.id = :id")
                 .setParameter("id", eventId)

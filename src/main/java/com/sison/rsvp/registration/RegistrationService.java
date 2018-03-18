@@ -12,6 +12,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 /**
+ * Service layer for basic crud on the registration entity
  *
  * @author Mark
  */
@@ -22,7 +23,14 @@ public class RegistrationService extends RsvpCrudService<Registration, Integer> 
         super(Registration.class);
     }
 
+    /**
+     * Retrieve all registrations for a given invite
+     *
+     * @param invite the invitation record
+     * @return
+     */
     public List<Registration> getByInvite(InvitedGuest invite) {
+        //Registrations match invite by firstname/lastname and same event.
         return em.createQuery("select r from Registration as r where r.event.id = :id and r.firstName = :firstName and r.lastName = :lastName")
                 .setParameter("id", invite.getEvent().getId())
                 .setParameter("firstName", invite.getFirstName())
@@ -30,6 +38,12 @@ public class RegistrationService extends RsvpCrudService<Registration, Integer> 
                 .getResultList();
     }
 
+    /**
+     * Retrieve all registrations for a given event
+     *
+     * @param eventId the id of the event
+     * @return
+     */
     public List<Registration> getByEvent(Integer eventId) {
         return em.createQuery("select r from Registration as r where r.event.id = :id")
                 .setParameter("id", eventId)

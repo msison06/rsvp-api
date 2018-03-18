@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 /**
+ * Superclass for guest entities for firstname/lastname etc.
  *
  * @author Mark
  */

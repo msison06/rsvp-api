@@ -4,8 +4,6 @@ import com.sison.rsvp.entity.Event;
 import com.sison.rsvp.entity.Registration;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -16,15 +14,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
+ * Resource layer for general users to rsvp
  *
  * @author Mark
  */
 @Stateless
 @Path("")
 public class RsvpResource {
-
-    @PersistenceUnit(name = "rsvp_pu")
-    EntityManagerFactory emf;
 
     @Inject
     protected RsvpService rsvpService;

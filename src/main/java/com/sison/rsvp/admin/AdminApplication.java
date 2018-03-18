@@ -2,7 +2,7 @@ package com.sison.rsvp.admin;
 
 import com.sison.rsvp.event.EventResource;
 import com.sison.rsvp.guest.GuestResource;
-import com.sison.rsvp.guest.InvitedGuestResource;
+import com.sison.rsvp.guest.InvitationResource;
 import com.sison.rsvp.registration.RegistrationResource;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +22,7 @@ public class AdminApplication extends Application {
         HashSet<Class<?>> resources = new HashSet<>();
         resources.add(EventResource.class);
         resources.add(GuestResource.class);
-        resources.add(InvitedGuestResource.class);
+        resources.add(InvitationResource.class);
         resources.add(RegistrationResource.class);
         return resources;
     }

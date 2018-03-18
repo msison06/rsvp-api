@@ -39,7 +39,7 @@ public class Event implements Serializable, Identifiable<Integer> {
     private Date date;
 
     @OneToMany(mappedBy = "event")
-    private Set<InvitedGuest> guestList = new HashSet<>();
+    private Set<Invitation> guestList = new HashSet<>();
 
     @OneToMany(mappedBy = "event")
     private Set<Registration> registrations = new HashSet<>();
@@ -70,11 +70,11 @@ public class Event implements Serializable, Identifiable<Integer> {
         this.date = date;
     }
 
-    public Set<InvitedGuest> getGuestList() {
+    public Set<Invitation> getGuestList() {
         return guestList;
     }
 
-    public void setGuestList(Set<InvitedGuest> guestList) {
+    public void setGuestList(Set<Invitation> guestList) {
         this.guestList = guestList;
     }
 

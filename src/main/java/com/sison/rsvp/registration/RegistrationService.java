@@ -5,7 +5,7 @@
  */
 package com.sison.rsvp.registration;
 
-import com.sison.rsvp.entity.InvitedGuest;
+import com.sison.rsvp.entity.Invitation;
 import com.sison.rsvp.entity.Registration;
 import com.sison.rsvp.persistence.RsvpCrudService;
 import java.util.List;
@@ -29,7 +29,7 @@ public class RegistrationService extends RsvpCrudService<Registration, Integer> 
      * @param invite the invitation record
      * @return
      */
-    public List<Registration> getByInvite(InvitedGuest invite) {
+    public List<Registration> getByInvite(Invitation invite) {
         //Registrations match invite by firstname/lastname and same event.
         return em.createQuery("select r from Registration as r where r.event.id = :id and r.firstName = :firstName and r.lastName = :lastName")
                 .setParameter("id", invite.getEvent().getId())

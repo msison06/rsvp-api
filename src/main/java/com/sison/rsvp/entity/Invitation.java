@@ -17,8 +17,8 @@ import org.apache.johnzon.mapper.JohnzonIgnore;
  * @author Mark
  */
 @Entity
-@Table(name = "INVITED_GUEST")
-public class InvitedGuest extends Guest {
+@Table(name = "INVITATION")
+public class Invitation extends Guest {
 
     @Column(name = "EVENT")
     @ManyToOne(optional = false)
@@ -27,7 +27,7 @@ public class InvitedGuest extends Guest {
     @Column(name = "EST_ADDITIONAL_GUESTS")
     private Integer estAdditionalGuests;
 
-    public InvitedGuest() {
+    public Invitation() {
         estAdditionalGuests = 0;
     }
 

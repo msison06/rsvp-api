@@ -1,6 +1,6 @@
 package com.sison.rsvp.guest;
 
-import com.sison.rsvp.entity.InvitedGuest;
+import com.sison.rsvp.entity.Invitation;
 import com.sison.rsvp.ws.CrudResource;
 import javax.annotation.PostConstruct;
 import javax.annotation.security.RolesAllowed;
@@ -14,17 +14,17 @@ import javax.ws.rs.Path;
  * @author Mark
  */
 @Stateless
-@Path("/invitedguests")
+@Path("/invitations")
 @RolesAllowed({"rsvpadmin"})
-public class InvitedGuestResource extends CrudResource<InvitedGuest, Integer> {
+public class InvitationResource extends CrudResource<Invitation, Integer> {
 
     @Inject
-    protected InvitedGuestService invitedGuestService;
+    protected InvitationService invitationService;
 
     @PostConstruct
     private void postConstruct() {
         //set superclass's crud service in post construct so dependencies have
         //already been injected
-        setCrudService(invitedGuestService);
+        setCrudService(invitationService);
     }
 }

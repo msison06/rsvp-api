@@ -1,7 +1,7 @@
 package com.sison.rsvp.guest;
 
 import com.sison.rsvp.entity.Guest;
-import com.sison.rsvp.entity.InvitedGuest;
+import com.sison.rsvp.entity.Invitation;
 import com.sison.rsvp.entity.Registration;
 import java.io.Serializable;
 import java.util.List;
@@ -16,7 +16,7 @@ public class ConfirmedGuest extends Guest implements Serializable {
     private Integer estAdditionalGuests;
     private List<Registration> registrations;
 
-    public ConfirmedGuest(InvitedGuest inv, List<Registration> registrations) {
+    public ConfirmedGuest(Invitation inv, List<Registration> registrations) {
         this.firstName = inv.getFirstName();
         this.lastName = inv.getLastName();
         estAdditionalGuests = inv.getEstAdditionalGuests();

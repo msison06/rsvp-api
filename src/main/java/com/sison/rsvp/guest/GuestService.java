@@ -1,6 +1,6 @@
 package com.sison.rsvp.guest;
 
-import com.sison.rsvp.entity.InvitedGuest;
+import com.sison.rsvp.entity.Invitation;
 import com.sison.rsvp.entity.Registration;
 import com.sison.rsvp.registration.RegistrationService;
 import java.util.LinkedList;
@@ -23,7 +23,7 @@ public class GuestService {
     protected EntityManager em;
 
     @Inject
-    protected InvitedGuestService invGuestService;
+    protected InvitationService invitationService;
 
     @Inject
     protected RegistrationService regService;
@@ -35,7 +35,7 @@ public class GuestService {
      * @return
      */
     public List<ConfirmedGuest> getConfirmedGuests(Integer eventId) {
-        List<InvitedGuest> invites = invGuestService.getByEvent(eventId);
+        List<Invitation> invites = invitationService.getByEvent(eventId);
         List<ConfirmedGuest> confirmed;
 
         confirmed = invites.stream()
@@ -101,7 +101,7 @@ public class GuestService {
      * @return
      */
     private List<Registration> invitedRegistrations(Integer eventId) {
-        List<InvitedGuest> invites = invGuestService.getByEvent(eventId);
+        List<Invitation> invites = invitationService.getByEvent(eventId);
 
         List<Registration> invitedRegistrations = new LinkedList<>();
 

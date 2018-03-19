@@ -1,8 +1,9 @@
 package com.sison.rsvp.persistence;
 
+import com.sison.rsvp.validation.Problem;
+import com.sison.rsvp.validation.UserInputException;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
 
 /**
  * Generic create, retireve, update, delete, etc. for a given entity.
@@ -81,7 +82,7 @@ public abstract class CrudService<E, I> {
         //In most cases, we want to avoid returning null.
         //Throw an exception here that'll just bubble up to the top
         if (record == null) {
-            throw new EntityNotFoundException(entityClass.getSimpleName() + " with id " + id + " was not found");
+            recordNotFoundException(id);
         }
 
         return record;
@@ -105,9 +106,7 @@ public abstract class CrudService<E, I> {
      * @return
      */
     public E update(I id, E input) {
-        if (id == null) {
-            throw new IllegalArgumentException("update requires id");
-        }
+        validateRecordExists(id);
 
         E updated = em.merge(input);
         return updated;
@@ -119,6 +118,32 @@ public abstract class CrudService<E, I> {
      * @param id
      */
     public void delete(I id) {
+        validateRecordExists(id);
+
         em.remove(get(id));
+    }
+
+    /**
+     * Validate that a record with a given id exists to operate on.
+     *
+     * @param id
+     */
+    private void validateRecordExists(I id) {
+        if (id == null || !exists(id)) {
+            recordNotFoundException(id);
+        }
+    }
+
+    /**
+     * throws a userInputException explaining that a record with the given id
+     * wasn't found
+     *
+     * @param id
+     */
+    private void recordNotFoundException(I id) {
+        Problem p = new Problem();
+        p.setSummary("Not Found");
+        p.setMessage(entityClass.getSimpleName() + " with id " + id + " was not found");
+        throw new UserInputException(p);
     }
 }

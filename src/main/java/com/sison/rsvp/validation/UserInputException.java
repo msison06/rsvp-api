@@ -2,6 +2,7 @@ package com.sison.rsvp.validation;
 
 import java.util.LinkedList;
 import java.util.List;
+import javax.ejb.ApplicationException;
 
 /**
  * Exception for user input
